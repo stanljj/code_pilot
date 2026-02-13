@@ -13,9 +13,9 @@ services:
       - "8080:8080"
     environment:
       # 连接本机已部署的 MySQL 5.7（容器内通过 host.docker.internal 访问宿主机 3306）
-      SPRING_DATASOURCE_URL: jdbc:mysql://${MYSQL_HOST:-host.docker.internal}:${MYSQL_PORT:-3306}/${MYSQL_DATABASE:-code_pilot}?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
-      SPRING_DATASOURCE_USERNAME: ${MYSQL_USER:-root}
-      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
+      SPRING_DATASOURCE_URL: jdbc:mysql://host.docker.internal:3306/code_pilot?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: 123456
       # 大模型等敏感配置建议用环境变量传入
       # LLM_QWEN_MAX_API_KEY: ${DASHSCOPE_API_KEY}
       # LLM_CODE_QWEN_API_KEY: ${DASHSCOPE_API_KEY}
