@@ -1,0 +1,56 @@
+.header {
+  margin-bottom: 48rpx;
+}
+
+.title {
+  display: block;
+  font-size: 44rpx;
+  font-weight: bold;
+  color: #e94560;
+  margin-bottom: 16rpx;
+}
+
+.subtitle {
+  font-size: 26rpx;
+  color: #8892a0;
+}
+
+.form .textarea {
+  width: 100%;
+  min-height: 320rpx;
+  box-sizing: border-box;
+  padding: 24rpx;
+  background: #0f3460;
+  border-radius: 12rpx;
+  color: #e8e8e8;
+  font-size: 28rpx;
+  margin-bottom: 16rpx;
+}
+
+.form .placeholder {
+  color: #5a6577;
+}
+
+.char-count {
+  margin-bottom: 24rpx;
+}
+
+.form .btn-primary {
+  width: 100%;
+}
+
+.tips {
+  margin-top: 48rpx;
+  padding: 24rpx;
+  font-size: 24rpx;
+}
+
+.tips text {
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.tips .tips-title {
+  color: #e94560;
+  margin-bottom: 12rpx;
+}

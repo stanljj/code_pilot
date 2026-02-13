@@ -1,0 +1,14 @@
+<template>
+  <div class="app">
+    <router-view />
+  </div>
+</template>
+
+<script setup>
+</script>
+
+<style>
+  * { box-sizing: border-box; }
+  body { margin: 0; font-family: system-ui, "Segoe UI", sans-serif; background: #f5f6f8; }
+  .app { min-height: 100vh; }
+</style>

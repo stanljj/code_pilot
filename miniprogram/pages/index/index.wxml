@@ -1,0 +1,28 @@
+<view class="container">
+  <view class="header">
+    <text class="title">CodePilot Mini</text>
+    <text class="subtitle">输入问题或粘贴代码，获取分析与建议</text>
+  </view>
+
+  <view class="form">
+    <textarea
+      class="textarea"
+      placeholder="例如：帮我写一个 Redis 缓存装饰器 / 这段 NullPointerException 怎么修？ / 解释这段 React Hook 代码"
+      placeholder-class="placeholder"
+      value="{{content}}"
+      bindinput="onInput"
+      maxlength="20000"
+      auto-height
+    />
+    <view class="char-count text-muted">{{content.length}}/20000</view>
+    <button class="btn-primary" bindtap="onSubmit" disabled="{{loading}}">
+      {{loading ? '提交中…' : '提交提问'}}
+    </button>
+  </view>
+
+  <view class="tips text-muted">
+    <text class="tips-title">若报错「请求失败」请做两件事：</text>
+    <text>1. 确保后端已启动（如 mvn spring-boot:run，端口 8080）</text>
+    <text>2. 开发者工具右上角「详情」→「本地设置」→ 勾选「不校验合法域名…」</text>
+  </view>
+</view>

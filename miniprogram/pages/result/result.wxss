@@ -1,0 +1,68 @@
+.section {
+  margin-bottom: 40rpx;
+}
+
+.label {
+  display: block;
+  font-size: 24rpx;
+  color: #e94560;
+  margin-bottom: 12rpx;
+}
+
+.label-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12rpx;
+}
+
+.label-row .link {
+  font-size: 24rpx;
+  color: #e94560;
+}
+
+.value {
+  font-size: 28rpx;
+  color: #e8e8e8;
+}
+
+.value.block {
+  display: block;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+.code-block {
+  background: #0f3460;
+  border-radius: 12rpx;
+  padding: 24rpx;
+  font-family: "Monaco", "Consolas", monospace;
+  font-size: 24rpx;
+  white-space: pre-wrap;
+  word-break: break-all;
+  margin-top: 8rpx;
+}
+
+.doc-refs {
+  margin-top: 8rpx;
+}
+
+.doc-title {
+  display: block;
+  font-size: 26rpx;
+  color: #e8e8e8;
+  margin-bottom: 4rpx;
+}
+
+.doc-link {
+  display: block;
+  font-size: 24rpx;
+  color: #8892a0;
+  word-break: break-all;
+  margin-bottom: 12rpx;
+}
+
+.btn-primary {
+  margin-top: 32rpx;
+  width: 100%;
+}

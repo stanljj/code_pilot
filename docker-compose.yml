@@ -1,0 +1,24 @@
+# CodePilot Mini 后端 - 阿里云服务器部署（使用已有 MySQL 5.7）
+# 在服务器 47.96.135.97 上执行：docker compose up -d
+# 需先在已有 MySQL 中创建库 code_pilot 并执行 db/V1__init_schema.sql 或 docker/mysql-init/01-schema.sql
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    image: codepilot-mini-backend:latest
+    container_name: codepilot-mini-backend
+    ports:
+      - "8080:8080"
+    environment:
+      # 连接本机已部署的 MySQL 5.7（容器内通过 host.docker.internal 访问宿主机 3306）
+      SPRING_DATASOURCE_URL: jdbc:mysql://${MYSQL_HOST:-host.docker.internal}:${MYSQL_PORT:-3306}/${MYSQL_DATABASE:-code_pilot}?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_USER:-root}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
+      # 大模型等敏感配置建议用环境变量传入
+      # LLM_QWEN_MAX_API_KEY: ${DASHSCOPE_API_KEY}
+      # LLM_CODE_QWEN_API_KEY: ${DASHSCOPE_API_KEY}
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    restart: unless-stopped
