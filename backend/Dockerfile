@@ -1,6 +1,6 @@
 # CodePilot Mini 后端 - 多阶段构建，最终镜像仅含 JAR + JRE
 # 构建阶段：Maven 打包
-FROM eclipse-temurin:17-jdk-alpine AS builder
+FROM openjdk:17-jdk-alpine AS builder
 WORKDIR /build
 
 # 先只复制 pom，利用 Docker 缓存
@@ -14,7 +14,7 @@ COPY src ./src
 RUN mvn package -DskipTests -B
 
 # 运行阶段：仅 JRE + 应用 JAR
-FROM eclipse-temurin:17-jre-alpine
+FROM openjdk:17-jre-alpine
 WORKDIR /app
 
 # 时区（可选）
