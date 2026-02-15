@@ -1,23 +1,17 @@
 # CodePilot Mini 后端 - 多阶段构建
-# 构建阶段：使用 openjdk:17-jdk（含 JDK + apt）
-FROM openjdk:17-jdk AS builder
+# 构建阶段：使用官方 maven 镜像（含 JDK + Maven + apt）
+FROM maven:3.9.6-openjdk-17 AS builder
 WORKDIR /build
 
+# 复制 pom 并下载依赖（利用缓存）
 COPY pom.xml .
-# 安装 curl（Debian 系统）
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends curl && \
-    rm -rf /var/lib/apt/lists/*
-
-# 下载并安装 Maven
-RUN curl -sL https://repo.maven.apache.org/maven2/org/apache/maven/apache-maven/3.9.6/apache-maven-3.9.6-bin.tar.gz | tar xz -C /usr/share && \
-    ln -s /usr/share/apache-maven-3.9.6/bin/mvn /usr/bin/mvn
-
 RUN mvn dependency:go-offline -B || true
+
+# 复制源码并打包
 COPY src ./src
 RUN mvn package -DskipTests -B
 
-# 运行阶段：使用 openjdk:17-jre-slim（轻量、安全）
+# 运行阶段：使用轻量 JRE
 FROM openjdk:17-jre-slim
 WORKDIR /app
 
