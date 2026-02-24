@@ -6,10 +6,11 @@ spring:
   application:
     name: codepilot-mini
   datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://47.96.135.97:3306/code_pilot?useUnicode=true&characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai
     username: root
     password: 123456
-    driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
     hibernate:
       ddl-auto: validate
@@ -27,12 +28,40 @@ llm:
   code-qwen:
     model: qwen3-coder-plus
     api-key: sk-36a9a876df164f20aeab8aeae4c7870c
+  embedding:
+    model: ${EMBEDDING_MODEL:text-embedding-v2}
+    api-key: sk-36a9a876df164f20aeab8aeae4c7870c
 
 # Milvus 向量库（RAG）
 milvus:
-  host: ${MILVUS_HOST:localhost}
-  port: ${MILVUS_PORT:19530}
+  host: 47.96.135.97
+  port: 19530
+  database: default
   collection-prefix: codepilot_
+  # 向量维度（text-embedding-v2 为 1536）
+  dimension: 1536
+  # 每次检索返回的最大结果数
+  max-top-k: 10
+  # 连接池配置
+  pool:
+    max-total: 20
+    max-idle: 10
+    min-idle: 2
+    max-wait-millis: 3000
+  # 认证配置
+#  username: ${MILVUS_USERNAME:}
+#  password: ${MILVUS_PASSWORD:}
+  # 超时配置
+  connect-timeout-millis: 30000
+  read-timeout-millis: 60000
+  write-timeout-millis: 60000
+  # 空间索引类型
+  index-type: FLAT
+  metric-type: COSINE
+  # 分片数量
+  shards-num: 1
+  # 复制份数
+  replicas-num: 1
 
 # 企业微信 OAuth 2.0
 wecom:
@@ -40,6 +69,39 @@ wecom:
   agent-id: ${WECOM_AGENT_ID:}
   secret: ${WECOM_SECRET:}
   redirect-uri: ${WECOM_REDIRECT_URI:http://localhost:8080/api/auth/wecom/callback}
+
+# 微信小程序登录（code2Session 换 openid，再签发 JWT）
+wechat:
+  miniprogram:
+    app-id: wxd03bda2117312a32
+    app-secret: a0c41d388467eee7c14195c8680aafaa
+# JWT 配置（登录接口返回的 token）
+jwt:
+  secret: ${JWT_SECRET:codepilot-mini-default-secret-change-in-production}
+  expiration-ms: ${JWT_EXPIRATION_MS:604800000}
+
+# 阿里云OCR配置
+aliyun:
+  access-key-id: ${ALIBABA_CLOUD_ACCESS_KEY_ID:}
+  access-key-secret: ${ALIBABA_CLOUD_ACCESS_KEY_SECRET:}
+
+# 请求分类：规则引擎和/或小模型（PUBLIC vs ENTERPRISE）
+classifier:
+  # 模式：rule=仅规则引擎；model=仅小模型；rule_then_model=先规则，不确定时再调小模型
+  mode: rule_then_model
+  rule:
+    # 命中任一则视为企业上下文倾向（需同时有 tenantId 才判 ENTERPRISE）
+    enterprise-patterns:
+      - "(?i)(规范|v\\d+\\.\\d+|jira|confluence|内部|项目|repo|仓库|pr|mr)\\b"
+      - "(?i)我们(公司|团队|项目|规范)"
+      - "(?i)根据(文档|wiki|confluence)"
+  model:
+    enabled: true
+    # 小模型名称（阿里云 DashScope，如 qwen-turbo 成本低、时延小）
+    model: qwen-turbo
+    api-key: sk-36a9a876df164f20aeab8aeae4c7870c
+    # 未配置时回退到 llm.qwen-max.api-key
+    max-tokens: 10
 
 # 安全与合规
 security:
@@ -60,3 +122,12 @@ security:
 
 audit:
   enabled: true
+
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: health,info
+#  endpoint:
+#    health:
+#      show-details: when-authorized

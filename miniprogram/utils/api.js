@@ -22,6 +22,27 @@ function ask(content, sessionId, source) {
   })
 }
 
+/**
+ * 发送OCR请求
+ * @param {string} imagePath - 图片文件路径
+ * @param {string} [sessionId] - 可选会话 ID
+ * @param {string} [source] - 可选来源，默认为'photo'
+ * @returns {Promise<AskResponse>}
+ */
+function ocrAsk(imagePath, sessionId, source = 'photo') {
+  return request({
+    method: 'POST',
+    url: '/api/v1/ask/ocr',
+    uploadFile: true,
+    data: {
+      image: imagePath,
+      sessionId: sessionId || null,
+      source: source
+    }
+  })
+}
+
 module.exports = {
-  ask
+  ask,
+  ocrAsk
 }

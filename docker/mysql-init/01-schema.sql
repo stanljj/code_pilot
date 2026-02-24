@@ -39,3 +39,14 @@ CREATE TABLE IF NOT EXISTS session_cache (
     expires_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     INDEX idx_user_expires (user_id, expires_at)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 微信小程序用户：登录 code2Session 后查/建用户、关联 tenantId、签发 JWT
+CREATE TABLE IF NOT EXISTS wx_user (
+    id BIGINT AUTO_INCREMENT PRIMARY KEY,
+    open_id VARCHAR(64) NOT NULL COMMENT '微信 openid',
+    tenant_id VARCHAR(64) NOT NULL DEFAULT 'default' COMMENT '关联租户，用于 RAG 隔离',
+    created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uk_open_id (open_id),
+    INDEX idx_tenant_id (tenant_id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

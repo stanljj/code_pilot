@@ -1,0 +1,365 @@
+{
+  "info": {
+    "title": "CodePilot Mini - Ask API",
+    "description": "CodePilot Mini 项目的 /api/v1/ask 接口测试数据",
+    "version": "1.0.0"
+  },
+  "paths": {
+    "/api/v1/ask": {
+      "post": {
+        "summary": "提问接口",
+        "description": "向CodePilot Mini系统提交问题并获得回答",
+        "requestBody": {
+          "description": "提问请求",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["content"],
+                "properties": {
+                  "content": {
+                    "type": "string",
+                    "description": "用户输入的问题内容",
+                    "example": "如何在Spring Boot中配置数据库连接池？",
+                    "maxLength": 20000
+                  },
+                  "sessionId": {
+                    "type": "string",
+                    "description": "会话ID，用于7天会话缓存",
+                    "example": "session_1234567890"
+                  },
+                  "source": {
+                    "type": "string",
+                    "description": "问题来源，如photo/voice/paste",
+                    "enum": ["photo", "voice", "paste"],
+                    "example": "paste"
+                  }
+                }
+              },
+              "examples": {
+                "example1": {
+                  "summary": "基本问题示例",
+                  "value": {
+                    "content": "如何在Spring Boot中配置数据库连接池？"
+                  }
+                },
+                "example2": {
+                  "summary": "带会话ID的问题示例",
+                  "value": {
+                    "content": "如何处理跨域请求？",
+                    "sessionId": "session_1234567890",
+                    "source": "paste"
+                  }
+                },
+                "example3": {
+                  "summary": "代码相关问题示例",
+                  "value": {
+                    "content": "以下代码有什么问题？\n\n@RestController\npublic class UserController {\n    @GetMapping(\"/users\")\n    public List<User> getUsers() {\n        return userRepository.findAll();\n    }\n}\n\n上述代码没有进行异常处理，也没有考虑性能优化，请给出改进方案。",
+                    "sessionId": "session_abcdefg",
+                    "source": "paste"
+                  }
+                },
+                "example4": {
+                  "summary": "企业级问题示例",
+                  "value": {
+                    "content": "根据公司内部规范，如何实现用户权限管理模块？",
+                    "sessionId": "session_enterprise_001",
+                    "source": "photo"
+                  }
+                },
+                "example5": {
+                  "summary": "语音转文字问题示例",
+                  "value": {
+                    "content": "帮我生成一个Spring Boot的CRUD控制器模板",
+                    "source": "voice"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "成功响应",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "requestType": {
+                      "type": "string",
+                      "description": "请求类型：public / enterprise",
+                      "example": "public"
+                    },
+                    "analysis": {
+                      "type": "string",
+                      "description": "问题分析摘要",
+                      "example": "这是一个关于Spring Boot数据库连接池配置的问题，主要涉及HikariCP、Druid等连接池的配置方法。"
+                    },
+                    "suggestion": {
+                      "type": "string",
+                      "description": "修复/实现建议",
+                      "example": "推荐使用HikariCP作为默认连接池，因为它性能优秀且稳定。需要在application.yml中配置连接池参数，包括最小空闲连接数、最大连接数、连接超时时间等。"
+                    },
+                    "code": {
+                      "type": "string",
+                      "description": "高亮显示的代码片段",
+                      "example": "# application.yml 配置示例\nspring:\n  datasource:\n    url: jdbc:mysql://localhost:3306/mydb\n    username: root\n    password: password\n    driver-class-name: com.mysql.cj.jdbc.Driver\n    hikari:\n      minimum-idle: 5\n      maximum-pool-size: 20\n      connection-timeout: 30000\n      idle-timeout: 300000\n      max-lifetime: 1200000"
+                    },
+                    "docRefs": {
+                      "type": "array",
+                      "description": "相关文档引用",
+                      "items": {
+                        "type": "object",
+                        "properties": {
+                          "title": {
+                            "type": "string",
+                            "description": "文档标题",
+                            "example": "《Spring Boot 官方文档 - 数据访问》"
+                          },
+                          "link": {
+                            "type": "string",
+                            "description": "文档链接",
+                            "example": "https://docs.spring.io/spring-boot/docs/current/reference/html/data.html"
+                          }
+                        }
+                      },
+                      "example": [
+                        {
+                          "title": "《Spring Boot 官方文档 - 数据访问》",
+                          "link": "https://docs.spring.io/spring-boot/docs/current/reference/html/data.html"
+                        },
+                        {
+                          "title": "《HikariCP 性能调优指南》",
+                          "link": "https://github.com/brettwooldridge/HikariCP/wiki"
+                        }
+                      ]
+                    },
+                    "cardUrl": {
+                      "type": "string",
+                      "description": "分享卡片URL",
+                      "example": "https://work.weixin.qq.com/share/abc123"
+                    }
+                  }
+                },
+                "examples": {
+                  "example1": {
+                    "summary": "数据库连接池配置响应示例",
+                    "value": {
+                      "requestType": "public",
+                      "analysis": "这是一个关于Spring Boot数据库连接池配置的问题，主要涉及HikariCP、Druid等连接池的配置方法。",
+                      "suggestion": "推荐使用HikariCP作为默认连接池，因为它性能优秀且稳定。需要在application.yml中配置连接池参数，包括最小空闲连接数、最大连接数、连接超时时间等。",
+                      "code": "# application.yml 配置示例\nspring:\n  datasource:\n    url: jdbc:mysql://localhost:3306/mydb\n    username: root\n    password: password\n    driver-class-name: com.mysql.cj.jdbc.Driver\n    hikari:\n      minimum-idle: 5\n      maximum-pool-size: 20\n      connection-timeout: 30000\n      idle-timeout: 300000\n      max-lifetime: 1200000",
+                      "docRefs": [
+                        {
+                          "title": "《Spring Boot 官方文档 - 数据访问》",
+                          "link": "https://docs.spring.io/spring-boot/docs/current/reference/html/data.html"
+                        },
+                        {
+                          "title": "《HikariCP 性能调优指南》",
+                          "link": "https://github.com/brettwooldridge/HikariCP/wiki"
+                        }
+                      ],
+                      "cardUrl": "https://work.weixin.qq.com/share/abc123"
+                    }
+                  },
+                  "example2": {
+                    "summary": "代码修复建议响应示例",
+                    "value": {
+                      "requestType": "public",
+                      "analysis": "您的代码缺少异常处理和性能优化措施，建议添加适当的异常捕获和分页查询功能。",
+                      "suggestion": "1. 添加try-catch异常处理机制\n2. 实现分页查询以避免大数据量加载\n3. 考虑添加缓存策略提升性能\n4. 添加适当的日志记录",
+                      "code": "@RestController\npublic class UserController {\n    \n    @Autowired\n    private UserRepository userRepository;\n    \n    @GetMapping(\"/users\")\n    public ResponseEntity<List<User>> getUsers(\n            @RequestParam(defaultValue = \"0\") int page,\n            @RequestParam(defaultValue = \"10\") int size) {\n        try {\n            Pageable pageable = PageRequest.of(page, size);\n            Page<User> userPage = userRepository.findAll(pageable);\n            return ResponseEntity.ok(userPage.getContent());\n        } catch (Exception e) {\n            log.error(\"获取用户列表失败\", e);\n            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)\n                                 .build();\n        }\n    }\n}",
+                      "docRefs": [
+                        {
+                          "title": "《Spring Boot 异常处理最佳实践》",
+                          "link": "https://docs.spring.io/spring-boot/docs/current/reference/html/web.html#web.servlet.spring-mvc.exception-handling"
+                        }
+                      ],
+                      "cardUrl": null
+                    }
+                  },
+                  "example3": {
+                    "summary": "企业级问题响应示例",
+                    "value": {
+                      "requestType": "enterprise",
+                      "analysis": "根据公司内部权限管理规范，需要实现基于角色的访问控制(RBAC)模型，并遵循安全编码标准。",
+                      "suggestion": "1. 使用Spring Security实现RBAC权限模型\n2. 遵循最小权限原则\n3. 实现细粒度的资源访问控制\n4. 记录操作审计日志",
+                      "code": "// 示例代码：使用Spring Security配置权限\n@Configuration\n@EnableWebSecurity\npublic class SecurityConfig {\n    \n    @Bean\n    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {\n        http.authorizeHttpRequests(authz -> authz\n            .requestMatchers(\"/public/**\").permitAll()\n            .requestMatchers(\"/admin/**\").hasRole(\"ADMIN\")\n            .anyRequest().authenticated()\n        )\n        .oauth2ResourceServer(oauth2 -> oauth2.jwt(withDefaults()));\n        \n        return http.build();\n    }\n}",
+                      "docRefs": [
+                        {
+                          "title": "《公司内部权限管理规范 v2.1》",
+                          "link": "https://confluence.company.com/pages/viewpage.action?pageId=123456789"
+                        },
+                        {
+                          "title": "《Spring Security 安全编码指南》",
+                          "link": "https://spring.io/projects/spring-security"
+                        }
+                      ],
+                      "cardUrl": "https://work.weixin.qq.com/share/corp_789"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "请求参数错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-11-20T10:30:00.000+00:00"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "example": 400
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "Bad Request"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "content 不能为空"
+                    },
+                    "path": {
+                      "type": "string",
+                      "example": "/api/v1/ask"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "服务器内部错误",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "timestamp": {
+                      "type": "string",
+                      "format": "date-time",
+                      "example": "2023-11-20T10:30:00.000+00:00"
+                    },
+                    "status": {
+                      "type": "integer",
+                      "example": 500
+                    },
+                    "error": {
+                      "type": "string",
+                      "example": "Internal Server Error"
+                    },
+                    "message": {
+                      "type": "string",
+                      "example": "服务器内部错误，请稍后重试"
+                    },
+                    "path": {
+                      "type": "string",
+                      "example": "/api/v1/ask"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "tags": [
+          "Gateway"
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "AskRequest": {
+        "type": "object",
+        "required": ["content"],
+        "properties": {
+          "content": {
+            "type": "string",
+            "description": "用户输入的问题内容",
+            "example": "如何在Spring Boot中配置数据库连接池？",
+            "maxLength": 20000
+          },
+          "sessionId": {
+            "type": "string",
+            "description": "会话ID，用于7天会话缓存",
+            "example": "session_1234567890"
+          },
+          "source": {
+            "type": "string",
+            "description": "问题来源，如photo/voice/paste",
+            "enum": ["photo", "voice", "paste"],
+            "example": "paste"
+          }
+        }
+      },
+      "AskResponse": {
+        "type": "object",
+        "properties": {
+          "requestType": {
+            "type": "string",
+            "description": "请求类型：public / enterprise",
+            "example": "public"
+          },
+          "analysis": {
+            "type": "string",
+            "description": "问题分析摘要",
+            "example": "这是一个关于Spring Boot数据库连接池配置的问题，主要涉及HikariCP、Druid等连接池的配置方法。"
+          },
+          "suggestion": {
+            "type": "string",
+            "description": "修复/实现建议",
+            "example": "推荐使用HikariCP作为默认连接池，因为它性能优秀且稳定。需要在application.yml中配置连接池参数，包括最小空闲连接数、最大连接数、连接超时时间等。"
+          },
+          "code": {
+            "type": "string",
+            "description": "高亮显示的代码片段",
+            "example": "# application.yml 配置示例\nspring:\n  datasource:\n    url: jdbc:mysql://localhost:3306/mydb\n    username: root\n    password: password\n    driver-class-name: com.mysql.cj.jdbc.Driver\n    hikari:\n      minimum-idle: 5\n      maximum-pool-size: 20\n      connection-timeout: 30000\n      idle-timeout: 300000\n      max-lifetime: 1200000"
+          },
+          "docRefs": {
+            "type": "array",
+            "description": "相关文档引用",
+            "items": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "description": "文档标题",
+                  "example": "《Spring Boot 官方文档 - 数据访问》"
+                },
+                "link": {
+                  "type": "string",
+                  "description": "文档链接",
+                  "example": "https://docs.spring.io/spring-boot/docs/current/reference/html/data.html"
+                }
+              }
+            },
+            "example": [
+              {
+                "title": "《Spring Boot 官方文档 - 数据访问》",
+                "link": "https://docs.spring.io/spring-boot/docs/current/reference/html/data.html"
+              },
+              {
+                "title": "《HikariCP 性能调优指南》",
+                "link": "https://github.com/brettwooldridge/HikariCP/wiki"
+              }
+            ]
+          },
+          "cardUrl": {
+            "type": "string",
+            "description": "分享卡片URL",
+            "example": "https://work.weixin.qq.com/share/abc123"
+          }
+        }
+      }
+    }
+  }
+}

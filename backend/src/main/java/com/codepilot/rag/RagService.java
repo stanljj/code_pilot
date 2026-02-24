@@ -1,5 +1,6 @@
 package com.codepilot.rag;
 
+import com.codepilot.rag.RagChunk;
 import java.util.List;
 
 /**

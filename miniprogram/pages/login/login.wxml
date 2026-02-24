@@ -1,0 +1,30 @@
+<view class="container">
+  <view class="header">
+    <text class="title">CodePilot Mini</text>
+    <text class="subtitle">登录后使用智能问答与代码助手</text>
+  </view>
+
+  <view class="card">
+    <view class="card-title">微信一键登录</view>
+    <view class="card-desc">使用当前微信账号登录，后端将校验 code 并签发访问凭证</view>
+    <button
+      class="btn-login"
+      type="primary"
+      bindtap="onLogin"
+      disabled="{{loading}}"
+      loading="{{loading}}"
+    >
+      {{loading ? '登录中…' : '微信登录'}}
+    </button>
+  </view>
+
+  <view class="debug-section" wx:if="{{isLocalDebug}}">
+    <view class="debug-title">本地调试</view>
+    <view class="debug-item">后端地址：{{baseUrl}}</view>
+    <view class="debug-tip">请确保：1）本机已启动后端（如 mvn spring-boot:run）；2）开发者工具「详情」→「本地设置」→ 勾选「不校验合法域名、web-view、TLS 以及 HTTPS 证书」</view>
+  </view>
+
+  <view class="tips text-muted">
+    <text>未配置微信小程序密钥时，登录可能失败；可在首页使用 Basic 演示账号（若后端开启）。</text>
+  </view>
+</view>

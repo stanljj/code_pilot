@@ -4,6 +4,12 @@
     <text class="subtitle">输入问题或粘贴代码，获取分析与建议</text>
   </view>
 
+  <view class="rag-tips text-muted" wx:if="{{ragSamples.length > 0}}">
+    <text class="rag-tips-title">走 RAG 测试（需已登录）：点下面一句填入后提交</text>
+    <view class="rag-chips">
+      <text wx:for="{{ragSamples}}" wx:key="*this" class="rag-chip" data-content="{{item}}" bindtap="onFillRagSample">{{item}}</text>
+    </view>
+  </view>
   <view class="form">
     <textarea
       class="textarea"
@@ -15,8 +21,29 @@
       auto-height
     />
     <view class="char-count text-muted">{{content.length}}/20000</view>
+    
+    <!-- OCR功能区域 -->
+    <view class="ocr-section">
+      <view class="ocr-title">拍照识码</view>
+      <view class="ocr-buttons">
+        <button class="btn-secondary" bindtap="onChooseImage">
+          📷 选择图片
+        </button>
+        <button class="btn-secondary" bindtap="onTakePhoto">
+          📸 拍照
+        </button>
+      </view>
+      <view wx:if="{{imagePath}}" class="image-preview">
+        <image src="{{imagePath}}" class="preview-image" mode="widthFix"></image>
+        <button class="btn-clear" bindtap="onClearImage">清除</button>
+      </view>
+    </view>
+    
     <button class="btn-primary" bindtap="onSubmit" disabled="{{loading}}">
       {{loading ? '提交中…' : '提交提问'}}
+    </button>
+    <button wx:if="{{imagePath}}" class="btn-primary ocr-submit" bindtap="onOcrSubmit" disabled="{{loading}}">
+      {{loading ? '识别中…' : '识别图片并提问'}}
     </button>
   </view>
 
@@ -24,5 +51,8 @@
     <text class="tips-title">若报错「请求失败」请做两件事：</text>
     <text>1. 确保后端已启动（如 mvn spring-boot:run，端口 8080）</text>
     <text>2. 开发者工具右上角「详情」→「本地设置」→ 勾选「不校验合法域名…」</text>
+  </view>
+  <view class="login-link">
+    <text class="link" bindtap="onReLogin">重新登录</text>
   </view>
 </view>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ApifoxUploaderProjectSetting">
+    <option name="apifoxAccessToken" value="APS-TfK7QBi37QWUzKHjbfy8vvzKo10upQrz" />
+    <option name="apifoxProjectIds">
+      <array>
+        <option value="# ModuleName:ProjectID" />
+        <option value="dningbo-starter:7634055" />
+        <option value="dningbo-workcenter:7634055" />
+        <option value="dningbo-industrialcenter:7634055" />
+        <option value="dningbo-tenantcenter:7634055" />
+        <option value="dningbo-miniprogram:7634055" />
+        <option value="dningbo-generator:7634055" />
+        <option value="dningbo-appcenter:7634055" />
+        <option value="dningbo-apicenter:7634055" />
+        <option value="dningbo-flowable:7634055" />
+        <option value="dningbo-content:7634055" />
+        <option value="dningbo-dify:7634055" />
+        <option value="dningbo-job:7634055" />
+        <option value="dningbo-attractinvestment:7634055" />
+        <option value="dningbo-propertyservices:7634055" />
+        <option value="dningbo-zhuyun:7634055" />
+        <option value="dningbo-cmmgt:7634055" />
+        <option value="dningbo-files:7634055" />
+        <option value="codepilot-mini-backend:7844730" />
+      </array>
+    </option>
+    <option name="yapiTokens" value="" />
+  </component>
+</project>

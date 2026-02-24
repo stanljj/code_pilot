@@ -1,0 +1,81 @@
+{
+  "info": {
+    "name": "CodePilot Mini - Ask API Collection",
+    "schema": "https://apifox-json-schema-spec.com/draft-2022-12/schema",
+    "_postman_id": "ask-api-collection-v1"
+  },
+  "item": [
+    {
+      "name": "Ask API",
+      "item": [
+        {
+          "name": "/api/v1/ask",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"content\": \"如何在Spring Boot中配置数据库连接池？\",\n  \"sessionId\": \"session_1234567890\",\n  \"source\": \"paste\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/v1/ask",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "v1", "ask"]
+            },
+            "description": "向CodePilot Mini系统提交问题并获得回答"
+          },
+          "response": [
+            {
+              "name": "成功响应",
+              "status": "OK",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"requestType\": \"public\",\n  \"analysis\": \"这是一个关于Spring Boot数据库连接池配置的问题，主要涉及HikariCP、Druid等连接池的配置方法。\",\n  \"suggestion\": \"推荐使用HikariCP作为默认连接池，因为它性能优秀且稳定。需要在application.yml中配置连接池参数，包括最小空闲连接数、最大连接数、连接超时时间等。\",\n  \"code\": \"# application.yml 配置示例\\nspring:\\n  datasource:\\n    url: jdbc:mysql://localhost:3306/mydb\\n    username: root\\n    password: password\\n    driver-class-name: com.mysql.cj.jdbc.Driver\\n    hikari:\\n      minimum-idle: 5\\n      maximum-pool-size: 20\\n      connection-timeout: 30000\\n      idle-timeout: 300000\\n      max-lifetime: 1200000\",\n  \"docRefs\": [\n    {\n      \"title\": \"《Spring Boot 官方文档 - 数据访问》\",\n      \"link\": \"https://docs.spring.io/spring-boot/docs/current/reference/html/data.html\"\n    },\n    {\n      \"title\": \"《HikariCP 性能调优指南》\",\n      \"link\": \"https://github.com/brettwooldridge/HikariCP/wiki\"\n    }\n  ],\n  \"cardUrl\": \"https://work.weixin.qq.com/share/abc123\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              },
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ]
+            },
+            {
+              "name": "请求参数错误",
+              "status": "Bad Request",
+              "body": {
+                "mode": "raw",
+                "raw": "{\n  \"timestamp\": \"2023-11-20T10:30:00.000+00:00\",\n  \"status\": 400,\n  \"error\": \"Bad Request\",\n  \"message\": \"content 不能为空\",\n  \"path\": \"/api/v1/ask\"\n}",
+                "options": {
+                  "raw": {
+                    "language": "json"
+                  }
+                }
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost:8080"
+    }
+  ]
+}
