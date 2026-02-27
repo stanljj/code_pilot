@@ -1,94 +1,102 @@
+/* 登录页 - 简约风格 */
+
 .header {
-  margin-bottom: 64rpx;
+  margin-bottom: 72rpx;
+  padding-top: 24rpx;
 }
 
 .title {
   display: block;
-  font-size: 48rpx;
-  font-weight: bold;
-  color: #e94560;
-  margin-bottom: 20rpx;
+  font-size: 42rpx;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin-bottom: 14rpx;
+  letter-spacing: -0.5rpx;
 }
 
 .subtitle {
   font-size: 28rpx;
-  color: #8892a0;
+  color: #94a3b8;
+  line-height: 1.5;
 }
 
 .card {
-  background: #0f3460;
-  border-radius: 16rpx;
-  padding: 48rpx;
-  margin-bottom: 32rpx;
-  border: 1rpx solid #2a4d8c;
+  background: #252d3d;
+  border-radius: 20rpx;
+  padding: 48rpx 40rpx;
+  margin-bottom: 36rpx;
+  border: 1rpx solid #334155;
 }
 
 .card-title {
-  font-size: 34rpx;
-  font-weight: bold;
-  color: #e8e8e8;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #e2e8f0;
   margin-bottom: 16rpx;
 }
 
 .card-desc {
   font-size: 26rpx;
-  color: #8892a0;
+  color: #94a3b8;
   margin-bottom: 40rpx;
   line-height: 1.6;
 }
 
 .btn-login {
   width: 100%;
-  height: 88rpx;
-  line-height: 88rpx;
-  background: linear-gradient(135deg, #e94560 0%, #c73e54 100%);
+  height: 96rpx;
+  line-height: 96rpx;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
   color: #fff;
   border: none;
-  border-radius: 12rpx;
-  font-size: 32rpx;
+  border-radius: 16rpx;
+  font-size: 30rpx;
+  font-weight: 500;
 }
 
 .btn-login:active {
-  opacity: 0.9;
+  opacity: 0.92;
 }
 
 .btn-login[disabled] {
-  color: rgba(255, 255, 255, 0.8);
+  opacity: 0.6;
 }
 
 .debug-section {
-  background: #1a1a2e;
-  border: 1rpx solid #e94560;
-  border-radius: 12rpx;
-  padding: 24rpx;
-  margin-bottom: 24rpx;
+  background: #252d3d;
+  border: 1rpx solid #334155;
+  border-radius: 16rpx;
+  padding: 28rpx;
+  margin-bottom: 28rpx;
 }
 
 .debug-title {
   font-size: 26rpx;
-  font-weight: bold;
-  color: #e94560;
+  font-weight: 600;
+  color: #94a3b8;
   margin-bottom: 16rpx;
 }
 
 .debug-item {
   font-size: 24rpx;
-  color: #a0aec0;
+  color: #cbd5e1;
   margin-bottom: 12rpx;
   word-break: break-all;
 }
 
 .debug-tip {
   font-size: 22rpx;
-  color: #8892a0;
+  color: #64748b;
   line-height: 1.5;
 }
 
 .tips {
   padding: 16rpx 0;
   font-size: 24rpx;
+  color: #64748b;
 }
 
 .tips text {
   display: block;
+  line-height: 1.5;
 }

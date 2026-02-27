@@ -1,3 +1,5 @@
+/* 结果页 - 简约风格 */
+
 .section {
   margin-bottom: 40rpx;
 }
@@ -5,8 +7,9 @@
 .label {
   display: block;
   font-size: 24rpx;
-  color: #e94560;
+  color: #94a3b8;
   margin-bottom: 12rpx;
+  font-weight: 500;
 }
 
 .label-row {
@@ -18,12 +21,17 @@
 
 .label-row .link {
   font-size: 24rpx;
-  color: #e94560;
+  color: #6366f1;
+}
+
+.label-row .link:active {
+  opacity: 0.8;
 }
 
 .value {
   font-size: 28rpx;
-  color: #e8e8e8;
+  color: #e2e8f0;
+  line-height: 1.6;
 }
 
 .value.block {
@@ -33,36 +41,43 @@
 }
 
 .code-block {
-  background: #0f3460;
+  background: #252d3d;
   border-radius: 12rpx;
-  padding: 24rpx;
-  font-family: "Monaco", "Consolas", monospace;
+  padding: 28rpx;
+  font-family: "SF Mono", "Monaco", "Consolas", monospace;
   font-size: 24rpx;
+  line-height: 1.5;
   white-space: pre-wrap;
   word-break: break-all;
-  margin-top: 8rpx;
+  margin-top: 12rpx;
+  color: #cbd5e1;
+  border: 1rpx solid #334155;
 }
 
 .doc-refs {
-  margin-top: 8rpx;
+  margin-top: 12rpx;
 }
 
 .doc-title {
   display: block;
   font-size: 26rpx;
-  color: #e8e8e8;
-  margin-bottom: 4rpx;
+  color: #e2e8f0;
+  margin-bottom: 6rpx;
 }
 
 .doc-link {
   display: block;
   font-size: 24rpx;
-  color: #8892a0;
+  color: #6366f1;
   word-break: break-all;
-  margin-bottom: 12rpx;
+  margin-bottom: 16rpx;
+}
+
+.doc-link:active {
+  opacity: 0.8;
 }
 
 .btn-primary {
-  margin-top: 32rpx;
+  margin-top: 48rpx;
   width: 100%;
 }

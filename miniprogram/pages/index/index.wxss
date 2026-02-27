@@ -1,111 +1,112 @@
+/* 首页 - 简约风格 */
+
 .header {
-  margin-bottom: 48rpx;
+  margin-bottom: 56rpx;
+  padding-top: 16rpx;
 }
 
 .title {
   display: block;
-  font-size: 44rpx;
-  font-weight: bold;
-  color: #e94560;
-  margin-bottom: 16rpx;
+  font-size: 40rpx;
+  font-weight: 600;
+  color: #f1f5f9;
+  margin-bottom: 12rpx;
+  letter-spacing: -0.5rpx;
 }
 
 .subtitle {
   font-size: 26rpx;
-  color: #8892a0;
+  color: #94a3b8;
+  line-height: 1.5;
 }
 
+/* 输入区 */
 .form .textarea {
   width: 100%;
-  min-height: 320rpx;
+  min-height: 280rpx;
   box-sizing: border-box;
-  padding: 24rpx;
-  background: #0f3460;
-  border-radius: 12rpx;
-  color: #e8e8e8;
+  padding: 28rpx;
+  background: #252d3d;
+  border-radius: 16rpx;
+  color: #e2e8f0;
   font-size: 28rpx;
-  margin-bottom: 16rpx;
+  margin-bottom: 12rpx;
+  border: 1rpx solid #334155;
+  line-height: 1.5;
+}
+
+.form .textarea:focus {
+  border-color: #6366f1;
 }
 
 .form .placeholder {
-  color: #5a6577;
+  color: #64748b;
 }
 
+.char-count {
+  margin-bottom: 28rpx;
+  font-size: 24rpx;
+}
+
+/* RAG 快捷入口 */
 .rag-tips {
-  margin-bottom: 24rpx;
-  padding: 20rpx;
-  background: #0f3460;
-  border-radius: 12rpx;
-  border: 1rpx solid #2a4d8c;
+  margin-bottom: 28rpx;
+  padding: 24rpx;
+  background: #252d3d;
+  border-radius: 16rpx;
+  border: 1rpx solid #334155;
 }
 
 .rag-tips-title {
   display: block;
   font-size: 24rpx;
-  color: #e94560;
+  color: #94a3b8;
   margin-bottom: 16rpx;
 }
 
 .rag-chips {
   display: flex;
   flex-wrap: wrap;
-  gap: 16rpx;
+  gap: 12rpx;
 }
 
 .rag-chip {
   display: inline-block;
-  padding: 12rpx 20rpx;
-  background: #1a1a2e;
-  border: 1rpx solid #e94560;
-  border-radius: 8rpx;
+  padding: 14rpx 22rpx;
+  background: #1e293b;
+  border: 1rpx solid #475569;
+  border-radius: 24rpx;
   font-size: 24rpx;
-  color: #a0aec0;
+  color: #cbd5e1;
   white-space: normal;
   word-break: break-all;
 }
 
 .rag-chip:active {
-  background: #2a4d8c;
-  color: #fff;
+  background: #334155;
+  border-color: #6366f1;
+  color: #e2e8f0;
 }
 
-.char-count {
-  margin-bottom: 24rpx;
-}
-
+/* 主提交按钮 */
 .form .btn-primary {
   width: 100%;
+  margin-bottom: 20rpx;
 }
 
-.tips {
-  margin-top: 48rpx;
-  padding: 24rpx;
-  font-size: 24rpx;
-}
-
-.tips text {
-  display: block;
-  margin-bottom: 8rpx;
-}
-
-.tips .tips-title {
-  color: #e94560;
-  margin-bottom: 12rpx;
-}
-
-/* OCR功能样式 */
+/* OCR 区域 */
 .ocr-section {
-  margin: 32rpx 0;
-  padding: 24rpx;
-  background: #0f3460;
-  border-radius: 12rpx;
-  border: 1px solid #2a4d8c;
+  margin: 32rpx 0 28rpx;
+  padding: 28rpx;
+  background: #252d3d;
+  border-radius: 16rpx;
+  border: 1rpx solid #334155;
 }
 
 .ocr-title {
-  font-size: 28rpx;
-  color: #e94560;
-  font-weight: bold;
+  font-size: 26rpx;
+  color: #94a3b8;
+  font-weight: 500;
   margin-bottom: 24rpx;
   text-align: center;
 }
@@ -114,65 +115,86 @@
   display: flex;
   justify-content: space-between;
   gap: 20rpx;
-  margin-bottom: 24rpx;
+  margin-bottom: 20rpx;
 }
 
 .ocr-buttons .btn-secondary {
   flex: 1;
-  background: #2a4d8c;
-  border: 1px solid #4a6db2;
-  color: #ffffff;
+  background: #334155;
+  border: 1rpx solid #475569;
+  color: #e2e8f0;
   font-size: 26rpx;
-  padding: 20rpx 0;
-  border-radius: 8rpx;
+  padding: 22rpx 0;
+  border-radius: 12rpx;
 }
 
 .ocr-buttons .btn-secondary:active {
-  background: #1a3d7c;
+  background: #475569;
 }
 
 .image-preview {
-  margin-bottom: 24rpx;
+  margin-bottom: 20rpx;
   text-align: center;
 }
 
 .preview-image {
   max-width: 100%;
   max-height: 300rpx;
-  border-radius: 8rpx;
-  border: 1px solid #4a6db2;
+  border-radius: 12rpx;
+  border: 1rpx solid #475569;
   margin-bottom: 16rpx;
 }
 
 .btn-clear {
-  background: #dc3545;
-  color: #ffffff;
+  background: #475569;
+  color: #e2e8f0;
   border: none;
   font-size: 24rpx;
-  padding: 12rpx 24rpx;
-  border-radius: 6rpx;
+  padding: 12rpx 28rpx;
+  border-radius: 12rpx;
 }
 
 .btn-clear:active {
-  background: #bd2130;
+  background: #64748b;
 }
 
 .ocr-submit {
-  margin-top: 16rpx;
-  background: #e94560;
-  border: 1px solid #ff5c77;
+  margin-top: 8rpx;
+  background: linear-gradient(135deg, #6366f1 0%, #4f46e5 100%);
+  color: #fff;
+  border: none;
 }
 
-.ocr-submit:active {
-  background: #d93550;
+/* 底部提示 */
+.tips {
+  margin-top: 48rpx;
+  padding: 24rpx 0;
+  font-size: 24rpx;
+  color: #64748b;
+}
+
+.tips text {
+  display: block;
+  margin-bottom: 8rpx;
+  line-height: 1.5;
+}
+
+.tips .tips-title {
+  color: #94a3b8;
+  margin-bottom: 12rpx;
+  font-weight: 500;
 }
 
 .login-link {
-  margin-top: 24rpx;
+  margin-top: 32rpx;
   text-align: center;
 }
 
 .login-link .link {
-  color: #e94560;
+  color: #6366f1;
   font-size: 26rpx;
+}
+
+.login-link .link:active {
+  opacity: 0.8;
 }
